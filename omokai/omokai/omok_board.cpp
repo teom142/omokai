@@ -1,6 +1,31 @@
-#include "omok.h"
 #include "omok_board.h"
-#include "omokai.h"
+
+int omok_board::set_board(int x, int y, int val)
+{
+	if (is_safe(y) || main_board[x][y] == -1 || main_board[x][y] == 1)
+		return 1;
+	if (x < 0 || x > MAX_SIZE)
+		return 1;
+	main_board[x][y] = val;
+	return 0;
+}
+
+void omok_board::init_board()
+{
+	for (int i = 0; i < MAX_SIZE; i++)
+		for (int j = 0; j < MAX_SIZE; j++)
+			main_board[i][j] = 0;
+}
+
+int omok_board::is_win()
+{
+	for (int i = 0; i < MAX_SIZE; i++)
+		for (int j = 0; j < MAX_SIZE; j++)
+			for (int k = 1; k <= 4; k++)
+				if (con_dol(k, i, j, 5, 0, main_board))
+					return main_board[i][j];
+	return 0;
+}
 
 void omok_board::prt_victory()
 {
@@ -59,7 +84,7 @@ void omok_board::prt_board()
 			else if (main_board[i][j] == -1)
 				cout << "●";
 			else if (main_board[i][j] == -2)
-				cout << "▲"; 
+				cout << "▲";
 		}
 		cout << "\n";
 	}
@@ -75,17 +100,17 @@ void omok_board::prt_board()
 	cout << "\n";
 }
 
-void omok_board::user_input(int *x, int *y, int val)
+int omok_board::user_input(int* x, int* y, int val)
 {
 	char user = 0;
 
-	set_board(*x, *y, val*2);
+	set_board(*x, *y, val * 2);
 	while (user != 'r')
 	{
 		system("cls");
 		prt_board();
 		cout << "w, a, s, d로 이동후 r로 착수하세요" << endl;
-		user = getch();
+		user = _getch();
 		set_board(*x, *y, 0);
 		if (user == 'w')
 			if (!is_safe(*x - 2))
@@ -99,10 +124,12 @@ void omok_board::user_input(int *x, int *y, int val)
 		if (user == 'd')
 			if (!is_safe(*y + 1))
 				*y = *y + 1;
-		set_board(*x, *y, val*2);
+		set_board(*x, *y, val * 2);
 	}
-	set_board(*x-1, *y, val);
+	if (set_board(*x - 1, *y, val))
+		return 1;
 	set_board(*x, *y, 0);
 	system("cls");
 	prt_board();
+	return 0;
 }

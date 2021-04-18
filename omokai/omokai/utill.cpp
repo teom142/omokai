@@ -1,8 +1,8 @@
 #include "omok.h"
 #include "omokai.h"
-int main_board[MAX_SIZE + 1][MAX_SIZE]; //메인 대국판
+//int main_board[MAX_SIZE + 1][MAX_SIZE]; //메인 대국판
 
-int con_dol(int dire, int x, int y, int num, int open)
+int con_dol(int dire, int x, int y, int num, int open, int main_board[MAX_SIZE + 1][MAX_SIZE])
 {
 	int dol = main_board[x][y];
 	if (dol == 0)

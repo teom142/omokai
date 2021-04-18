@@ -20,7 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="omokio.cpp" />
+    <ClCompile Include="omokai.cpp" />
+    <ClCompile Include="omok_board.cpp" />
     <ClCompile Include="utill.cpp" />
   </ItemGroup>
   <ItemGroup>

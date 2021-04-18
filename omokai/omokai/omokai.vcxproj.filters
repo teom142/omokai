@@ -18,10 +18,13 @@
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="omokio.cpp">
+    <ClCompile Include="utill.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="utill.cpp">
+    <ClCompile Include="omok_board.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="omokai.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
