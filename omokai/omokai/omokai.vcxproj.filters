@@ -15,24 +15,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\omok\omok\main.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\omok\omok\omokio.cpp">
+    <ClCompile Include="omokio.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\omok\omok\utill.cpp">
+    <ClCompile Include="utill.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\omok\omok\omokai.h">
+    <ClInclude Include="omokai.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\omok\omok\omok_board.h">
+    <ClInclude Include="omok_board.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\omok\omok\omok.h">
+    <ClInclude Include="omok.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
