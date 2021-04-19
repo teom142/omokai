@@ -1,5 +1,10 @@
 #include "omok_board.h"
 
+int omok_board::get_board_dol(int x, int y)
+{
+	return main_board[x][y];
+}
+
 int omok_board::set_board(int x, int y, int val)
 {
 	if (is_safe(y) || main_board[x][y] == -1 || main_board[x][y] == 1)
@@ -22,7 +27,7 @@ int omok_board::is_win()
 	for (int i = 0; i < MAX_SIZE; i++)
 		for (int j = 0; j < MAX_SIZE; j++)
 			for (int k = 1; k <= 4; k++)
-				if (con_dol(k, i, j, 5, 0, main_board))
+				if (con_dol(k, i, j, 5, main_board))
 					return main_board[i][j];
 	return 0;
 }
@@ -51,6 +56,26 @@ void omok_board::prt_lose()
 	cout << "$$ |_____ $$ |__$$ |/  |__$$ |$$ |_____ " << endl;
 	cout << "$$       |$$    $$/ $$    $$/ $$       |" << endl;
 	cout << "$$$$$$$$/  $$$$$$/   $$$$$$/  $$$$$$$$/" << endl;
+}
+
+void omok_board::prt_board_easy()
+{
+	cout << "  y  ";
+	for (int i = 0; i < MAX_SIZE; i++)
+		cout << setw(2) << i << " ";
+	cout << endl;
+	cout << "x   -----------------\n";
+	for (int i = 0; i < MAX_SIZE; i++)
+	{
+		cout << setw(2) << i << " | ";
+		for (int j = 0; j < MAX_SIZE; j++)
+		{
+			cout << setw(2) << main_board[i][j] << " ";
+		}
+		cout << "|";
+		cout << endl;
+	}
+	cout << "    -----------------\n";
 }
 
 void omok_board::prt_board()
@@ -107,7 +132,7 @@ int omok_board::user_input(int* x, int* y, int val)
 	set_board(*x, *y, val * 2);
 	while (user != 'r')
 	{
-		system("cls");
+		//system("cls");
 		prt_board();
 		cout << "w, a, s, d로 이동후 r로 착수하세요" << endl;
 		user = _getch();
@@ -126,10 +151,11 @@ int omok_board::user_input(int* x, int* y, int val)
 				*y = *y + 1;
 		set_board(*x, *y, val * 2);
 	}
-	if (set_board(*x - 1, *y, val))
+	if (set_board(*x, *y, val))
 		return 1;
 	set_board(*x, *y, 0);
-	system("cls");
+	//system("cls");
+	//prt_board_easy();
 	prt_board();
 	return 0;
 }
