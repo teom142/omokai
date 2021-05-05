@@ -154,7 +154,7 @@ int omok_board::user_input(int* x, int* y, int val)
 	if (set_board(*x, *y, val))
 		return 1;
 	set_board(*x, *y, 0);
-	//system("cls");
+	system("cls");
 	//prt_board_easy();
 	prt_board();
 	return 0;

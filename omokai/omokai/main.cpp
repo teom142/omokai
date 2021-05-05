@@ -22,10 +22,11 @@ int main()
 		//if (!omok_board.user_input(&x, &y, -1) && vic)
 		//	omokai.alloc_val(x-1, y, -10);
 		omokai.special_val(omok_board);
+		omokai.prt_val_voard();
+		omokai.set_ai_xy(omok_board);
 		omok_board.set_board(omokai.ai_x, omokai.ai_y, -1);
 		vic = omok_board.is_win();
 		cout << endl;
-		omokai.prt_val_voard();
 	}
 	system("cls");
 	omok_board.prt_board();

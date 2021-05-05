@@ -3,6 +3,8 @@
 # include <iostream>
 # include <conio.h>
 # include <iomanip>
+# include <cstdlib>
+# include<ctime>
 # define MAX_SIZE 19
 
 using namespace std;
