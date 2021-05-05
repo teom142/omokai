@@ -32,7 +32,7 @@ int omok_board::is_win()
 	return 0;
 }
 
-void omok_board::prt_victory()
+void omok_board::prt_victory()		//승리시 출력
 {
 	cout << " __     __  ______   ______   ________   ______   _______   __      __ " << endl;
 	cout << "/  |   /  |/      | /      | /        | /      | /       | /  |    /  |" << endl;
@@ -132,19 +132,19 @@ int omok_board::user_input(int* x, int* y, int val)
 	set_board(*x, *y, val * 2);
 	while (user != 'r')
 	{
-		//system("cls");
+		system("cls");
 		prt_board();
 		cout << "w, a, s, d로 이동후 r로 착수하세요" << endl;
 		user = _getch();
 		set_board(*x, *y, 0);
 		if (user == 'w')
-			if (!is_safe(*x - 2))
+			if (!is_safe(*x - 1))
 				*x = *x - 1;
 		if (user == 'a')
 			if (!is_safe(*y - 1))
 				*y = *y - 1;
 		if (user == 's')
-			if (!is_safe(*x))
+			if (!is_safe(*x + 1))
 				*x = *x + 1;
 		if (user == 'd')
 			if (!is_safe(*y + 1))
@@ -155,6 +155,7 @@ int omok_board::user_input(int* x, int* y, int val)
 		return 1;
 	set_board(*x, *y, 0);
 	//system("cls");
+	//prt_board_easy();
 	prt_board();
 	return 0;
 }
