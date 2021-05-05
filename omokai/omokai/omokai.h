@@ -22,6 +22,8 @@ public:
 
 	int close_2(int x, int y, omok_board& bo);
 	int open_2(int x, int y, omok_board& bo);
+	int close_3(int x, int y, omok_board& bo);
+	int open_3(int x, int y, omok_board& bo);
 };
 
 #endif
