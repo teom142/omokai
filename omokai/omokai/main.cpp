@@ -31,8 +31,10 @@ int main()
 	}
 	system("cls");
 	omok_board.prt_board();
+	//prt_thumbs_up();
 	if (vic == 1)
 		omok_board.prt_victory();
 	else
 		omok_board.prt_lose();
+
 }

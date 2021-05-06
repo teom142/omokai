@@ -30,13 +30,15 @@ public:
 	int close_3(int x, int y, omok_board& bo, int val);
 	//val : 200
 	int open_3(int x, int y, omok_board& bo, int val);
-	//val : 300
-	int space_3(int x, int y, omok_board& bo, int val);
 	//val : 400
 	int close_4(int x, int y, omok_board& bo, int val);
+	//val : 370
+	int space_3(int x, int y, omok_board& bo, int val);
 
-	//val : 350
+	//val : 330
 	int ai_close_3(int x, int y, omok_board& bo, int val);
+	//val : 350
+	int ai_space_3(int x, int y, omok_board& bo, int val);
 	//val : 380
 	int ai_open_3(int x, int y, omok_board& bo, int val);
 	//val : 2000
