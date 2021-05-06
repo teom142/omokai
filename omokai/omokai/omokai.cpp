@@ -82,19 +82,20 @@ void omokai::special_val(omok_board& bo)
 	{
 		for (int j = 0; j < MAX_SIZE; j++)
 		{
-			close_2(i, j, bo);
-			open_2(i, j, bo);
-			close_3(i, j, bo);
-			open_3(i, j, bo);
-			ai_close_3(i, j, bo);	
-			ai_open_3(i, j, bo);
-			close_4(i, j, bo);
-			ai_close_4(i, j, bo);	
+			close_2(i, j, bo, 30);
+			open_2(i, j, bo, 40);
+			close_3(i, j, bo, 60);
+			open_3(i, j, bo, 200);
+			space_3(i, j, bo, 300);
+			ai_close_3(i, j, bo, 350);	
+			ai_open_3(i, j, bo, 380);
+			close_4(i, j, bo, 400);
+			ai_close_4(i, j, bo, 2000);	
 		}
 	}
 }
 
-int omokai::close_2(int x, int y, omok_board& bo)
+int omokai::close_2(int x, int y, omok_board& bo, int val)
 {
 	if (bo.main_board[x][y] != 1)
 		return 0;
@@ -104,25 +105,25 @@ int omokai::close_2(int x, int y, omok_board& bo)
 	{
 		if (is_safe_close(x, y - 1, bo) != is_safe_close(x, y + 2, bo))
 		{
-			if (!is_safe_close(x, y - 1, bo) && val_board[x][y - 1] < 30)
-				val_board[x][y - 1] = 30;
-			else if (!is_safe_close(x, y + 2, bo) && val_board[x][y + 2] < 30)
-				val_board[x][y + 2] = 30;
+			if (!is_safe_close(x, y - 1, bo) && val_board[x][y - 1] < val)
+				val_board[x][y - 1] = val;
+			else if (!is_safe_close(x, y + 2, bo) && val_board[x][y + 2] < val)
+				val_board[x][y + 2] = val;
 		}
 	}
 	for (int i = -1; i <= 1; i++)
 		if (con_dol(3 + i, x, y, 2, bo.main_board))
 			if (is_safe_close(x - 1, y + i, bo) != is_safe_close(x + 2, y + i * -2, bo))
 			{
-				if (!is_safe_close(x - 1, y + i, bo) && val_board[x - 1][y + i] < 30)
-					val_board[x - 1][y + i] = 30;
-				else if (!is_safe_close(x + 2, y + i * -2, bo) && val_board[x + 2][y + i * -2] < 30)
-					val_board[x + 2][y + i * -2] = 30;
+				if (!is_safe_close(x - 1, y + i, bo) && val_board[x - 1][y + i] < val)
+					val_board[x - 1][y + i] = val;
+				else if (!is_safe_close(x + 2, y + i * -2, bo) && val_board[x + 2][y + i * -2] < val)
+					val_board[x + 2][y + i * -2] = val;
 			}
 	return 1;
 }
 
-int omokai::open_2(int x, int y, omok_board& bo)
+int omokai::open_2(int x, int y, omok_board& bo, int val)
 {
 	if (bo.main_board[x][y] != 1)
 		return 0;
@@ -131,10 +132,10 @@ int omokai::open_2(int x, int y, omok_board& bo)
 	if (con_dol(1, x, y, 2, bo.main_board))
 	{
 		if (is_safe_close(x, y - 1, bo) == 0 && is_safe_close(x, y + 2, bo) == 0
-				&& val_board[x][y - 1] < 40 && val_board[x][y + 2] < 40)
+				&& val_board[x][y - 1] < val && val_board[x][y + 2] < val)
 		{
-			val_board[x][y - 1] = 40;
-			val_board[x][y + 2] = 40;
+			val_board[x][y - 1] = val;
+			val_board[x][y + 2] = val;
 		}
 	}
 	for (int i = -1; i <= 1; i++)
@@ -142,17 +143,17 @@ int omokai::open_2(int x, int y, omok_board& bo)
 		if (con_dol(3 + i, x, y, 2, bo.main_board))
 		{
 			if (is_safe_close(x - 1, y + i, bo) == 0 && is_safe_close(x + 2, y + i * -2, bo) == 0
-					&& val_board[x - 1][y + i] < 40 && val_board[x + 2][y + i * -2] < 40)
+					&& val_board[x - 1][y + i] < val && val_board[x + 2][y + i * -2] < val)
 			{
-				val_board[x - 1][y + i] = 40;
-				val_board[x + 2][y + i * -2] = 40;
+				val_board[x - 1][y + i] = val;
+				val_board[x + 2][y + i * -2] = val;
 			}
 		}
 	}
 	return 1;
 }
 
-int omokai::close_3(int x, int y, omok_board& bo)
+int omokai::close_3(int x, int y, omok_board& bo, int val)
 {
 	if (bo.main_board[x][y] != 1)
 		return 0;
@@ -162,25 +163,25 @@ int omokai::close_3(int x, int y, omok_board& bo)
 	{
 		if (is_safe_close(x, y - 1, bo) != is_safe_close(x, y + 3, bo) )
 		{
-			if (!is_safe_close(x, y - 1, bo) && val_board[x][y - 1] < 60)
-				val_board[x][y - 1] = 60;
-			else if (!is_safe_close(x, y + 3, bo) && val_board[x][y + 3] < 60)
-				val_board[x][y + 3] = 60;
+			if (!is_safe_close(x, y - 1, bo) && val_board[x][y - 1] < val)
+				val_board[x][y - 1] = val;
+			else if (!is_safe_close(x, y + 3, bo) && val_board[x][y + 3] < val)
+				val_board[x][y + 3] = val;
 		}
 	}
 	for (int i = -1; i <= 1; i++)
 		if (con_dol(i + 3, x, y, 3, bo.main_board))
 			if (is_safe_close(x - 1, y + i, bo) != is_safe_close(x + 3, y + i * -3, bo))
 			{
-				if (!is_safe_close(x - 1, y + i, bo) && val_board[x - 1][y + i] < 60)
-					val_board[x - 1][y + i] = 60;
-				else if (!is_safe_close(x + 3, y + i * -3, bo) && val_board[x + 3][y + i * -3] < 60)
-					val_board[x + 3][y + (i * -3)] = 60;
+				if (!is_safe_close(x - 1, y + i, bo) && val_board[x - 1][y + i] < val)
+					val_board[x - 1][y + i] = val;
+				else if (!is_safe_close(x + 3, y + i * -3, bo) && val_board[x + 3][y + i * -3] < val)
+					val_board[x + 3][y + (i * -3)] = val;
 			}
 	return 1;
 }
 
-int omokai::open_3(int x, int y, omok_board& bo)
+int omokai::open_3(int x, int y, omok_board& bo, int val)
 {
 	if (bo.main_board[x][y] != 1)
 		return 0;
@@ -189,10 +190,10 @@ int omokai::open_3(int x, int y, omok_board& bo)
 	if (con_dol(1, x, y, 3, bo.main_board))
 	{
 		if (is_safe_close(x, y - 1, bo) == 0 && is_safe_close(x, y + 3, bo) == 0
-			&& val_board[x][y - 1] < 200 && val_board[x][y + 3] < 200)
+			&& val_board[x][y - 1] < val && val_board[x][y + 3] < val)
 		{
-			val_board[x][y - 1] = 200;
-			val_board[x][y + 3] = 200;
+			val_board[x][y - 1] = val;
+			val_board[x][y + 3] = val;
 		}
 	}
 	for (int i = -1; i <= 1; i++)
@@ -200,17 +201,17 @@ int omokai::open_3(int x, int y, omok_board& bo)
 		if (con_dol(i + 3, x, y, 3, bo.main_board))
 		{
 			if (is_safe_close(x - 1, y + i, bo) == 0 && is_safe_close(x + 3, y + i * -3, bo) == 0
-				&& val_board[x - 1][y + i] < 200 && val_board[x + 3][y + i * -3] < 200)
+				&& val_board[x - 1][y + i] < val && val_board[x + 3][y + i * -3] < val)
 			{
-				val_board[x - 1][y + i] = 200;
-				val_board[x + 3][y + i * -3] = 200;
+				val_board[x - 1][y + i] = val;
+				val_board[x + 3][y + i * -3] = val;
 			}
 		}
 	}
 	return 1;
 }
 
-int omokai::close_4(int x, int y, omok_board& bo)
+int omokai::close_4(int x, int y, omok_board& bo, int val)
 {
 	if (bo.main_board[x][y] != 1)
 		return 0;
@@ -221,25 +222,50 @@ int omokai::close_4(int x, int y, omok_board& bo)
 	{
 		if (is_safe_close(x, y - 1, bo) != is_safe_close(x, y + 4, bo))
 		{
-			if (!is_safe_close(x, y - 1, bo) && val_board[x][y - 1] < 400)
-				val_board[x][y - 1] = 400;
-			else if (!is_safe_close(x, y + 4, bo) && val_board[x][y + 4] < 400)
-				val_board[x][y + 4] = 400;
+			if (!is_safe_close(x, y - 1, bo) && val_board[x][y - 1] < val)
+				val_board[x][y - 1] = val;
+			else if (!is_safe_close(x, y + 4, bo) && val_board[x][y + 4] < val)
+				val_board[x][y + 4] = val;
 		}
 	}
 	for (int i = -1; i <= 1; i++)
 		if (con_dol(i + 3, x, y, 4, bo.main_board))
 			if (is_safe_close(x - 1, y + i, bo) != is_safe_close(x + 3, y + i * -4, bo))
 			{
-				if (!is_safe_close(x - 1, y + i, bo) && val_board[x - 1][y + i] < 400)
-					val_board[x - 1][y + i] = 400;
-				else if (!is_safe_close(x + 4, y + i * -4, bo) && val_board[x + 4][y + i * -4] < 400)
-					val_board[x + 4][y + (i * -4)] = 400;
+				if (!is_safe_close(x - 1, y + i, bo) && val_board[x - 1][y + i] < val)
+					val_board[x - 1][y + i] = val;
+				else if (!is_safe_close(x + 4, y + i * -4, bo) && val_board[x + 4][y + i * -4] < val)
+					val_board[x + 4][y + (i * -4)] = val;
 			}
 	return 1;
 }
 
-int omokai::ai_close_3(int x, int y, omok_board& bo)
+int omokai::space_3(int x, int y, omok_board& bo, int val)
+{
+	if (bo.main_board[x][y] != 1)
+		return 0;
+	if (is_safe(y + 1) && is_safe(x + 1) && is_safe(x + 2) && is_safe(y + 2)
+		&& is_safe(x + 3) && is_safe(y + 3) && is_safe(x + 4) && is_safe(y + 4))
+		return 0;
+	if (con_dol_with_space(1, x, y, 3, bo.main_board))
+	{
+		if (!is_safe_close(x, y + 1, bo) && val_board[x][y + 1] < val)
+			val_board[x][y + 1] = val;
+		else if (!is_safe_close(x, y + 2, bo) && val_board[x][y + 2] < val)
+			val_board[x][y + 2] = val;
+	}
+	for (int i = -1; i <= 1; i++)
+		if (con_dol_with_space(i + 3, x, y, 3, bo.main_board))
+		{
+			if (!is_safe_close(x + 1, y - i, bo) && val_board[x + 1][y - i] < val)
+				val_board[x + 1][y - i] = val;
+			else if (!is_safe_close(x + 2, y - i * 2, bo) && val_board[x + 2][y - i * 2] < val)
+				val_board[x + 2][y - i * 2] = val;
+		}
+	return 1;
+}
+
+int omokai::ai_close_3(int x, int y, omok_board& bo, int val)
 {
 	if (bo.main_board[x][y] != -1)
 		return 0;
@@ -249,25 +275,25 @@ int omokai::ai_close_3(int x, int y, omok_board& bo)
 	{
 		if (is_safe_close(x, y - 1, bo) != is_safe_close(x, y + 3, bo))
 		{
-			if (!is_safe_close(x, y - 1, bo) && val_board[x][y - 1] < 350)
-				val_board[x][y - 1] = 350;
-			else if (!is_safe_close(x, y + 3, bo) && val_board[x][y + 3] < 350)
-				val_board[x][y + 3] = 350;
+			if (!is_safe_close(x, y - 1, bo) && val_board[x][y - 1] < val)
+				val_board[x][y - 1] = val;
+			else if (!is_safe_close(x, y + 3, bo) && val_board[x][y + 3] < val)
+				val_board[x][y + 3] = val;
 		}
 	}
 	for (int i = -1; i <= 1; i++)
 		if (con_dol(i + 3, x, y, 3, bo.main_board))
 			if (is_safe_close(x - 1, y + i, bo) != is_safe_close(x + 3, y + i * -3, bo))
 			{
-				if (!is_safe_close(x - 1, y + i, bo) && val_board[x - 1][y + i] < 350)
-					val_board[x - 1][y + i] = 350;
-				else if (!is_safe_close(x + 3, y + i * -3, bo) && val_board[x + 3][y + i * -3] < 350)
-					val_board[x + 3][y + (i * -3)] = 350;
+				if (!is_safe_close(x - 1, y + i, bo) && val_board[x - 1][y + i] < val)
+					val_board[x - 1][y + i] = val;
+				else if (!is_safe_close(x + 3, y + i * -3, bo) && val_board[x + 3][y + i * -3] < val)
+					val_board[x + 3][y + (i * -3)] = val;
 			}
 	return 1;
 }
 
-int omokai::ai_open_3(int x, int y, omok_board& bo)
+int omokai::ai_open_3(int x, int y, omok_board& bo, int val)
 {
 	if (bo.main_board[x][y] != -1)
 		return 0;
@@ -276,10 +302,10 @@ int omokai::ai_open_3(int x, int y, omok_board& bo)
 	if (con_dol(1, x, y, 3, bo.main_board))
 	{
 		if (is_safe_close(x, y - 1, bo) == 0 && is_safe_close(x, y + 3, bo) == 0
-			&& val_board[x][y - 1] < 380 && val_board[x][y + 3] < 380)
+			&& val_board[x][y - 1] < val && val_board[x][y + 3] < val)
 		{
-			val_board[x][y - 1] = 380;
-			val_board[x][y + 3] = 380;
+			val_board[x][y - 1] = val;
+			val_board[x][y + 3] = val;
 		}
 	}
 	for (int i = -1; i <= 1; i++)
@@ -287,17 +313,17 @@ int omokai::ai_open_3(int x, int y, omok_board& bo)
 		if (con_dol(i + 3, x, y, 3, bo.main_board))
 		{
 			if (is_safe_close(x - 1, y + i, bo) == 0 && is_safe_close(x + 3, y + i * -3, bo) == 0
-				&& val_board[x - 1][y + i] < 380 && val_board[x + 3][y + i * -3] < 380)
+				&& val_board[x - 1][y + i] < val && val_board[x + 3][y + i * -3] < val)
 			{
-				val_board[x - 1][y + i] = 380;
-				val_board[x + 3][y + i * -3] = 380;
+				val_board[x - 1][y + i] = val;
+				val_board[x + 3][y + i * -3] = val;
 			}
 		}
 	}
 	return 1;
 }
 
-int omokai::ai_close_4(int x, int y, omok_board& bo)
+int omokai::ai_close_4(int x, int y, omok_board& bo, int val)
 {
 	if (bo.main_board[x][y] != -1)
 		return 0;
@@ -308,20 +334,20 @@ int omokai::ai_close_4(int x, int y, omok_board& bo)
 	{
 		if (is_safe_close(x, y - 1, bo) != is_safe_close(x, y + 4, bo))
 		{
-			if (!is_safe_close(x, y - 1, bo) && val_board[x][y - 1] < 2000)
-				val_board[x][y - 1] = 2000;
-			else if (!is_safe_close(x, y + 4, bo) && val_board[x][y + 4] < 2000)
-				val_board[x][y + 4] = 2000;
+			if (!is_safe_close(x, y - 1, bo) && val_board[x][y - 1] < val)
+				val_board[x][y - 1] = val;
+			else if (!is_safe_close(x, y + 4, bo) && val_board[x][y + 4] < val)
+				val_board[x][y + 4] = val;
 		}
 	}
 	for (int i = -1; i <= 1; i++)
 		if (con_dol(i + 3, x, y, 4, bo.main_board))
 			if (is_safe_close(x - 1, y + i, bo) != is_safe_close(x + 3, y + i * -4, bo))
 			{
-				if (!is_safe_close(x - 1, y + i, bo) && val_board[x - 1][y + i] < 2000)
-					val_board[x - 1][y + i] = 2000;
-				else if (!is_safe_close(x + 4, y + i * -4, bo) && val_board[x + 4][y + i * -4] < 2000)
-					val_board[x + 4][y + (i * -4)] = 2000;
+				if (!is_safe_close(x - 1, y + i, bo) && val_board[x - 1][y + i] < val)
+					val_board[x - 1][y + i] = val;
+				else if (!is_safe_close(x + 4, y + i * -4, bo) && val_board[x + 4][y + i * -4] < val)
+					val_board[x + 4][y + (i * -4)] = val;
 			}
 	return 1;
 }

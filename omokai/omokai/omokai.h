@@ -23,22 +23,24 @@ public:
 	void init_val_board();
 
 	//val : 20
-	int close_2(int x, int y, omok_board& bo);
+	int close_2(int x, int y, omok_board& bo, int val);
 	//val : 40
-	int open_2(int x, int y, omok_board& bo);
+	int open_2(int x, int y, omok_board& bo, int val);
 	//val : 60
-	int close_3(int x, int y, omok_board& bo);
+	int close_3(int x, int y, omok_board& bo, int val);
 	//val : 200
-	int open_3(int x, int y, omok_board& bo);
+	int open_3(int x, int y, omok_board& bo, int val);
+	//val : 300
+	int space_3(int x, int y, omok_board& bo, int val);
 	//val : 400
-	int close_4(int x, int y, omok_board& bo);
+	int close_4(int x, int y, omok_board& bo, int val);
 
 	//val : 350
-	int ai_close_3(int x, int y, omok_board& bo);
+	int ai_close_3(int x, int y, omok_board& bo, int val);
 	//val : 380
-	int ai_open_3(int x, int y, omok_board& bo);	
+	int ai_open_3(int x, int y, omok_board& bo, int val);
 	//val : 2000
-	int ai_close_4(int x, int y, omok_board& bo);
+	int ai_close_4(int x, int y, omok_board& bo, int val);
 };
 
 #endif
