@@ -231,7 +231,7 @@ int omokai::close_4(int x, int y, omok_board& bo, int val)
 	}
 	for (int i = -1; i <= 1; i++)
 		if (con_dol(i + 3, x, y, 4, bo.main_board))
-			if (is_safe_close(x - 1, y + i, bo) != is_safe_close(x + 3, y + i * -4, bo))
+			if (is_safe_close(x - 1, y + i, bo) != is_safe_close(x + 4, y + i * -4, bo))
 			{
 				if (!is_safe_close(x - 1, y + i, bo) && val_board[x - 1][y + i] < val)
 					val_board[x - 1][y + i] = val;

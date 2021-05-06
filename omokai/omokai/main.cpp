@@ -4,7 +4,6 @@
 
 int main()
 {
-
 	omokai omokai;
 	omok_board omok_board;
 
