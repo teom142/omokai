@@ -8,18 +8,20 @@ int main()
 	omok_board omok_board;
 
 	omok_board.init_board();
-	omok_board.prt_board();
 	int x = MAX_SIZE / 2, y = MAX_SIZE / 2;
 	int x2 = MAX_SIZE / 2, y2 = MAX_SIZE / 2;
 	int vic = omok_board.is_win();
+	do {
+		cout << "인공지능의 공격성을 입력해주세요. (1 ~ 6 입력)\n참고로 5가 최고 난이도입니다 :)";
+		cin >> omokai.ad_carry;
+	} while (omokai.ad_carry < 1 || omokai.ad_carry > 6);
+	omok_board.prt_board();
 
 	while (!vic)
 	{
-		if(!omok_board.user_input(&x, &y, 1))
-			omokai.alloc_val(x, y, 10);
+		while (!omok_board.user_input(&x, &y, 1));
+		omokai.alloc_val(x, y, 10);
 		vic = omok_board.is_win();
-		//if (!omok_board.user_input(&x, &y, -1) && vic)
-		//	omokai.alloc_val(x-1, y, -10);
 		omokai.special_val(omok_board);
 		//omokai.prt_val_voard();
 		omokai.set_ai_xy(omok_board);

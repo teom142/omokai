@@ -8,10 +8,10 @@ class omokai
 {
 	int val_board[MAX_SIZE][MAX_SIZE] = {};
 
-
 public:
 	int ai_x;
 	int ai_y;
+	int ad_carry;
 
 	friend int omok_board::get_board_dol(int x, int y);
 	omokai();
@@ -28,13 +28,19 @@ public:
 	int open_2(int x, int y, omok_board& bo, int val);
 	//val : 60
 	int close_3(int x, int y, omok_board& bo, int val);
-	//val : 200
+	//val : 300
 	int open_3(int x, int y, omok_board& bo, int val);
 	//val : 400
 	int close_4(int x, int y, omok_board& bo, int val);
 	//val : 370
 	int space_3(int x, int y, omok_board& bo, int val);
+	//val : 450
+	int space_4(int x, int y, omok_board& bo, int val);
 
+	//val : 150
+	int ai_space_2(int x, int y, omok_board& bo, int val);
+	//val : 170
+	int ai_open_2(int x, int y, omok_board& bo, int val);
 	//val : 330
 	int ai_close_3(int x, int y, omok_board& bo, int val);
 	//val : 350

@@ -7,9 +7,7 @@ int omok_board::get_board_dol(int x, int y)
 
 int omok_board::set_board(int x, int y, int val)
 {
-	if (is_safe(y) || main_board[x][y] == -1 || main_board[x][y] == 1)
-		return 1;
-	if (x < 0 || x > MAX_SIZE)
+	if (is_safe(x) || is_safe(y) || main_board[x][y] == -1 || main_board[x][y] == 1)
 		return 1;
 	main_board[x][y] = val;
 	return 0;
@@ -151,11 +149,9 @@ int omok_board::user_input(int* x, int* y, int val)
 				*y = *y + 1;
 		set_board(*x, *y, val * 2);
 	}
-	if (set_board(*x, *y, val))
+	if (!set_board(*x, *y, val))
 		return 1;
-	set_board(*x, *y, 0);
-	system("cls");
-	//prt_board_easy();
-	prt_board();
+	cout << "해당 위치는 이미 돌이 놓여 있습니다\n아무 키 입력 후 재 착수";
+	user = _getch();
 	return 0;
 }

@@ -56,7 +56,7 @@ int con_dol_with_space(int dire, int x, int y, int num, int main_board[MAX_SIZE 
 	{
 		if (is_safe(y + num - 1))
 			return 0;
-		for (int i = y + 1; i < y + 4; i++)
+		for (int i = y + 1; i < y + num + 1; i++)
 			if (dol == main_board[x][i])
 				count++;
 		if (count == num - 1)
@@ -68,7 +68,7 @@ int con_dol_with_space(int dire, int x, int y, int num, int main_board[MAX_SIZE 
 	{
 		if (is_safe(y + num - 1) && is_safe(x + num - 1))
 			return 0;
-		for (int i = 1; i < 4; i++)
+		for (int i = 1; i < num + 1; i++)
 			if (dol == main_board[x + i][y + i])
 				count++;
 		if (count == num - 1)
@@ -80,7 +80,7 @@ int con_dol_with_space(int dire, int x, int y, int num, int main_board[MAX_SIZE 
 	{
 		if (is_safe(x + num - 1))
 			return 0;
-		for (int i = x + 1; i < x + 4; i++)
+		for (int i = x + 1; i < x + num + 1; i++)
 			if (dol == main_board[i][y])
 				count++;
 		if (count == num - 1)
@@ -92,7 +92,7 @@ int con_dol_with_space(int dire, int x, int y, int num, int main_board[MAX_SIZE 
 	{
 		if (is_safe(y - num + 1) && is_safe(x + num - 1))
 			return 0;
-		for (int i = 1; i < 4; i++)
+		for (int i = 1; i < num + 1; i++)
 			if (dol == main_board[x + i][y - i])
 				count++;
 		if (count == num - 1)
