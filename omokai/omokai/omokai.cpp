@@ -238,12 +238,10 @@ int omokai::open_3(int x, int y, omok_board& bo, int val)
 	{
 		if (con_dol(i + 3, x, y, 3, bo.main_board))
 		{
-			if (is_safe_close(x - 1, y + i, bo) == 0 && is_safe_close(x + 3, y + i * -3, bo) == 0
-				&& val_board[x - 1][y + i] < val && val_board[x + 3][y + i * -3] < val)
-			{
+			if (is_safe_close(x - 1, y + i, bo) == 0 &&  val_board[x - 1][y + i] < val)
 				val_board[x - 1][y + i] = val;
+			if (is_safe_close(x + 3, y + i * -3, bo) == 0 && val_board[x + 3][y + i * -3] < val)
 				val_board[x + 3][y + i * -3] = val;
-			}
 		}
 	}
 	return 1;
@@ -470,7 +468,7 @@ int omokai::ai_close_4(int x, int y, omok_board& bo, int val)
 
 int omokai::is_safe_close(int x, int y, omok_board& bo)		//해당 위치가 open이면 0반환
 {
-	if (is_safe(x) && is_safe(y))
+	if (is_safe(x) || is_safe(y))
 		return 1;
 	if (bo.main_board[x][y] != 0)
 		return 1;
