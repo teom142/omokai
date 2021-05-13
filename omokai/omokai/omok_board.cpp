@@ -1,4 +1,4 @@
-#include "omok_board.h"
+ï»¿#include "omok_board.h"
 
 int omok_board::get_board_dol(int x, int y)
 {
@@ -7,7 +7,7 @@ int omok_board::get_board_dol(int x, int y)
 
 int omok_board::set_board(int x, int y, int val)
 {
-	if (is_safe(x) || is_safe(y) || main_board[x][y] == -1 || main_board[x][y] == 1)
+	if ((is_safe(x) || is_safe(y) || main_board[x][y] == -1 || main_board[x][y] == -2 || main_board[x][y] == 1) && val != -2)
 		return 1;
 	main_board[x][y] = val;
 	return 0;
@@ -30,7 +30,7 @@ int omok_board::is_win()
 	return 0;
 }
 
-void omok_board::prt_victory()		//½Â¸®½Ã Ãâ·Â
+void omok_board::prt_victory()		//ìŠ¹ë¦¬ì‹œ ì¶œë ¥
 {
 	cout << " __     __  ______   ______   ________   ______   _______   __      __ " << endl;
 	cout << "/  |   /  |/      | /      | /        | /      | /       | /  |    /  |" << endl;
@@ -83,42 +83,37 @@ void omok_board::prt_board()
 		for (int j = 0; j < MAX_SIZE; j++)
 		{
 			if (main_board[i][j] == 0 && j == 0 && i == 0)
-				cout << "¦£-";
+				cout << "â”Œ-";
 			else if (main_board[i][j] == 0 && j == 0 && i == MAX_SIZE - 1)
-				cout << "¦¦-";
+				cout << "â””-";
 			else if (main_board[i][j] == 0 && j == 0 && i != 0 && i != MAX_SIZE - 1)
-				cout << "¦§-";
+				cout << "â”œ-";
 			else if (main_board[i][j] == 0 && j != 0 && j != MAX_SIZE - 1 && i != 0 && i != MAX_SIZE - 1)
-				cout << "¦«-";
+				cout << "â”¼-";
 			else if (main_board[i][j] == 0 && i == 0 && j != 0 && j != MAX_SIZE - 1)
-				cout << "¦¨-";
+				cout << "â”¬-";
 			else if (main_board[i][j] == 0 && i == 0 && j == MAX_SIZE - 1)
-				cout << "¦¤";
+				cout << "â”";
 			else if (main_board[i][j] == 0 && i != 0 && i != MAX_SIZE - 1 && j == MAX_SIZE - 1)
-				cout << "¦©";
+				cout << "â”¤";
 			else if (main_board[i][j] == 0 && i == MAX_SIZE - 1 && j != MAX_SIZE - 1 && j != 0)
-				cout << "¦ª-";
+				cout << "â”´-";
 			else if (main_board[i][j] == 0 && j == MAX_SIZE - 1 && i == MAX_SIZE - 1)
-				cout << "¦¥";
+				cout << "â”˜";
 			else if (main_board[i][j] == 1)
-				cout << "¡Û";
+				cout << "â—‹";
 			else if (main_board[i][j] == 2)
-				cout << "¡â";
+				cout << "â–³";
 			else if (main_board[i][j] == -1)
-				cout << "¡Ü";
+				cout << "â—";
 			else if (main_board[i][j] == -2)
-				cout << "¡ã";
+			{
+				cout << "âŠ™";
+				aix = i;
+				aiy = j;
+			}
 		}
 		cout << "\n";
-	}
-	for (int j = 0; j < MAX_SIZE; j++)
-	{
-		if (main_board[MAX_SIZE][j] == 2)
-			cout << "¡â";
-		else if (main_board[MAX_SIZE][j] == -2)
-			cout << "¡ã";
-		else if (main_board[MAX_SIZE][j] == 0)
-			cout << "  ";
 	}
 	cout << "\n";
 }
@@ -132,7 +127,7 @@ int omok_board::user_input(int* x, int* y, int val)
 	{
 		system("cls");
 		prt_board();
-		cout << "w, a, s, d·Î ÀÌµ¿ÈÄ r·Î Âø¼öÇÏ¼¼¿ä" << endl;
+		cout << "w, a, s, dë¡œ ì´ë™í›„ rë¡œ ì°©ìˆ˜í•˜ì„¸ìš”" << endl;
 		user = _getch();
 		set_board(*x, *y, 0);
 		if (user == 'w')
@@ -149,9 +144,11 @@ int omok_board::user_input(int* x, int* y, int val)
 				*y = *y + 1;
 		set_board(*x, *y, val * 2);
 	}
+	if (aix != -1 && aiy != -1)
+		main_board[aix][aiy] = -1;
 	if (!set_board(*x, *y, val))
 		return 1;
-	cout << "ÇØ´ç À§Ä¡´Â ÀÌ¹Ì µ¹ÀÌ ³õ¿© ÀÖ½À´Ï´Ù\n¾Æ¹« Å° ÀÔ·Â ÈÄ Àç Âø¼ö";
+	cout << "í•´ë‹¹ ìœ„ì¹˜ëŠ” ì´ë¯¸ ëŒì´ ë†“ì—¬ ìžˆìŠµë‹ˆë‹¤\nì•„ë¬´ í‚¤ ìž…ë ¥ í›„ ìž¬ ì°©ìˆ˜";
 	user = _getch();
 	return 0;
 }

@@ -3,7 +3,7 @@
 
 class omok_board
 {
-	
+	int aix = -1, aiy = -1;
 public:
 	int main_board[MAX_SIZE + 1][MAX_SIZE];
 
