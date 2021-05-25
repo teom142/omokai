@@ -2,7 +2,9 @@
 
 omokai::omokai()
 {
-
+	ai_x = -1;
+	ai_y = -1;
+	ad_carry = 0;
 }
 
 void omokai::set_ai_xy(omok_board& bo)
@@ -83,8 +85,8 @@ void omokai::special_val(omok_board& bo)
 			close_2(i, j, bo, 30);
 			open_2(i, j, bo, 40);
 			close_3(i, j, bo, 60);
-			space_3(i, j, bo, 370);
 			open_3(i, j, bo, 300);
+			space_3(i, j, bo, 370);
 			close_4(i, j, bo, 400);
 			space_4(i, j, bo, 450);
 			if (ad_carry >= 1)

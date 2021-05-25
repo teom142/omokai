@@ -3,8 +3,9 @@
 
 class omok_board
 {
-	int aix = -1, aiy = -1;
+	int aix, aiy;
 public:
+	omok_board();
 	int main_board[MAX_SIZE + 1][MAX_SIZE];
 
 	int get_board_dol(int x, int y);
