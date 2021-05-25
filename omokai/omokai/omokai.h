@@ -6,7 +6,7 @@
 
 class omokai
 {
-	int val_board[MAX_SIZE][MAX_SIZE] = {};
+	int val_board[MAX_SIZE][MAX_SIZE];
 
 public:
 	int ai_x;

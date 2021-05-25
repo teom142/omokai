@@ -2,7 +2,13 @@
 
 omokai::omokai()
 {
+	ai_x = -1;
+	ai_y = -1;
+	ad_carry = 0;
 
+	for (int i = 0; i < MAX_SIZE; i++)
+		for (int j = 0; j < MAX_SIZE; j++)
+			val_board[i][j] = 0;
 }
 
 void omokai::set_ai_xy(omok_board& bo)

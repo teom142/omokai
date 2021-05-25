@@ -1,5 +1,15 @@
 ﻿#include "omok_board.h"
 
+omok_board::omok_board()
+{
+	aix = -1;
+	aiy = -1;
+
+	for (int i = 0; i < MAX_SIZE; i++)
+		for (int j = 0; j < MAX_SIZE; j++)
+			main_board[i][j] = 0;
+}
+
 int omok_board::get_board_dol(int x, int y)
 {
 	return main_board[x][y];

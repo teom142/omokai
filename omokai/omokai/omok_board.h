@@ -3,10 +3,11 @@
 
 class omok_board
 {
-	int aix = -1, aiy = -1;
+	int aix , aiy;
 public:
 	int main_board[MAX_SIZE + 1][MAX_SIZE];
 
+	omok_board();
 	int get_board_dol(int x, int y);
 	int set_board(int x, int y, int val);		//main_board[x][y]를 val로 설정한다
 	void init_board();							//main_board 초기화
