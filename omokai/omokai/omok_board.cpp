@@ -66,26 +66,6 @@ void omok_board::prt_lose()
 	cout << "$$$$$$$$/  $$$$$$/   $$$$$$/  $$$$$$$$/" << endl;
 }
 
-void omok_board::prt_board_easy()
-{
-	cout << "  y  ";
-	for (int i = 0; i < MAX_SIZE; i++)
-		cout << setw(2) << i << " ";
-	cout << endl;
-	cout << "x   -----------------\n";
-	for (int i = 0; i < MAX_SIZE; i++)
-	{
-		cout << setw(2) << i << " | ";
-		for (int j = 0; j < MAX_SIZE; j++)
-		{
-			cout << setw(2) << main_board[i][j] << " ";
-		}
-		cout << "|";
-		cout << endl;
-	}
-	cout << "    -----------------\n";
-}
-
 void omok_board::prt_board()
 {
 	for (int i = 0; i < MAX_SIZE; i++)
@@ -135,7 +115,7 @@ int omok_board::user_input(int* x, int* y, int val)
 	set_board(*x, *y, val * 2);
 	while (user != 'r')
 	{
-		system("cls");
+		//system("cls");
 		prt_board();
 		cout << "w, a, s, d로 이동후 r로 착수하세요" << endl;
 		user = _getch();

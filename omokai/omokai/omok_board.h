@@ -15,7 +15,6 @@ public:
 	void prt_victory();
 	void prt_lose();
 	void prt_board();
-	int user_input(int* x, int* y, int val);
-	void prt_board_easy();
+	int user_input(int* x, int* y, int val);	//유저가 착수하는 기능을 구현한 함수이다.
 
 };

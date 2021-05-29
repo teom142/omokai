@@ -13,14 +13,13 @@ public:
 	int ai_y;
 	int ad_carry;
 
-	friend int omok_board::get_board_dol(int x, int y);
 	omokai();
-	void prt_val_voard();
-	void set_ai_xy(omok_board& bo);
-	void alloc_val(int x, int y, int val);
-	int is_safe_close(int x, int y, omok_board& bo);
-	void special_val(omok_board& bo);
-	void init_val_board();
+	void prt_val_voard();								//현재 가중치 출력
+	void set_ai_xy(omok_board& bo);						//가중치를 기반으로 ai가 착수할 위치 선택 후 착수
+	void alloc_val(int x, int y, int val);				//해당 돌 주변을 val가중치로 설정
+	int is_safe_close(int x, int y, omok_board& bo);	//index한 위치가 open이면 0을, close 혹은 위치 밖이면 1을 반환
+	void special_val(omok_board& bo);					//특정 가중치 부여
+	void init_val_board();								//10으로 설정된 부분을 제외하고 가중치를 모두 0으로 설정
 
 	//val : 20
 	int close_2(int x, int y, omok_board& bo, int val);
@@ -47,8 +46,10 @@ public:
 	int ai_space_3(int x, int y, omok_board& bo, int val);
 	//val : 380
 	int ai_open_3(int x, int y, omok_board& bo, int val);
-	//val : 2000
+	//val : 998
 	int ai_close_4(int x, int y, omok_board& bo, int val);
+	//val : 999
+	int ai_open_4(int x, int y, omok_board& bo, int val);
 };
 
 #endif
