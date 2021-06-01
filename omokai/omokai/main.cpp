@@ -8,8 +8,7 @@ int main()
 	omok_board omok_board;
 
 	omok_board.init_board();
-	int x = MAX_SIZE / 2, y = MAX_SIZE / 2;
-	int x2 = MAX_SIZE / 2, y2 = MAX_SIZE / 2;
+	int x = MAX_SIZE / 2, y = MAX_SIZE / 2;		//사용자가 입력하는 위치
 	int vic = omok_board.is_win();
 	do {
 		cout << "인공지능의 공격성을 입력해주세요. (1 ~ 6 입력)\n참고로 5가 최고 난이도입니다 :)";
@@ -34,7 +33,6 @@ int main()
 	}
 	//system("cls");
 	omok_board.prt_board();
-	//prt_thumbs_up();
 	if (vic == 1)
 		omok_board.prt_victory();
 	else

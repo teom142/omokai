@@ -17,8 +17,8 @@ int omok_board::get_board_dol(int x, int y)
 
 int omok_board::set_board(int x, int y, int val)
 {
-	if ((is_safe(x) || is_safe(y) || main_board[x][y] == -1 || main_board[x][y] == -2 || main_board[x][y] == 1) && val != -2)
-		return 1;
+	if (is_safe(x) || is_safe(y) || main_board[x][y] == -1 || main_board[x][y] == 1)
+		return 1;				//해당 위치가 -1 또는 1일경우 (com이나 플레이어가 착수했을 경우)값을 입력하지 않고 1을 반환
 	main_board[x][y] = val;
 	return 0;
 }
@@ -68,7 +68,7 @@ void omok_board::prt_lose()
 
 void omok_board::prt_board()
 {
-	for (int i = 0; i < MAX_SIZE; i++)
+	for (int i = 0; i < MAX_SIZE; i++)		//main_board의 값의 따라 오목판을 출력해주는 함수
 	{
 		for (int j = 0; j < MAX_SIZE; j++)
 		{
@@ -96,12 +96,6 @@ void omok_board::prt_board()
 				cout << "△";
 			else if (main_board[i][j] == -1)
 				cout << "●";
-			else if (main_board[i][j] == -2)
-			{
-				cout << "⊙";
-				aix = i;
-				aiy = j;
-			}
 		}
 		cout << "\n";
 	}
@@ -121,8 +115,8 @@ int omok_board::user_input(int* x, int* y, int val)
 		user = _getch();
 		set_board(*x, *y, 0);
 		if (user == 'w')
-			if (!is_safe(*x - 1))
-				*x = *x - 1;
+			if (!is_safe(*x - 1))		//사용자가 이동하려는 방향이 오목판을 벗어나는지 확인한 후
+				*x = *x - 1;			//커서를 이동한다.
 		if (user == 'a')
 			if (!is_safe(*y - 1))
 				*y = *y - 1;
@@ -136,7 +130,7 @@ int omok_board::user_input(int* x, int* y, int val)
 	}
 	if (aix != -1 && aiy != -1)
 		main_board[aix][aiy] = -1;
-	if (!set_board(*x, *y, val))
+	if (!set_board(*x, *y, val))		//set_board()의 반환값에 따라 착수를 성공적으로 했는지 못했는지 알 수 있다
 		return 1;
 	cout << "해당 위치는 이미 돌이 놓여 있습니다\n아무 키 입력 후 재 착수";
 	user = _getch();

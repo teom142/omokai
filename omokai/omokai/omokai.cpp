@@ -1,6 +1,6 @@
 #include "omokai.h"
 
-omokai::omokai()
+omokai::omokai()		//생성자를 이용해 모든 값을 초기화ㄴ
 {
 	ai_x = -1;
 	ai_y = -1;
@@ -16,6 +16,7 @@ void omokai::set_ai_xy(omok_board& bo)
 	ai_x = 0;
 	ai_y = 0;
 	int count = 1;
+
 	srand((unsigned int)time(NULL));
 	for (int i = 0; i < MAX_SIZE; i++)
 	{
@@ -23,18 +24,18 @@ void omokai::set_ai_xy(omok_board& bo)
 		{
 			if (bo.main_board[i][j] != 0)
 				val_board[i][j] = 0;
-			if (val_board[ai_x][ai_y] < val_board[i][j])
+			if (val_board[ai_x][ai_y] < val_board[i][j])		//최대값이 변경될 때 마다 count를 1로 초기화
 			{
+				count = 1;
 				ai_x = i;
 				ai_y = j;
-				count = 1;
 			}
-			else if (val_board[ai_x][ai_y] == val_board[i][j])
+			else if (val_board[ai_x][ai_y] == val_board[i][j])	//count값이 곧 중복되는 최대값의 개수
 				count++;
 
 		}
 	}
-	int n = rand() % count + 1;
+	int n = rand() % count + 1;			//가장 가중치가 높은 자리 중 랜덤으로 착수
 	for (int i = 0; i < MAX_SIZE; i++)
 	{
 		for (int j = 0; j < MAX_SIZE; j++)
@@ -56,7 +57,7 @@ void omokai::init_val_board()
 {
 	for (int i = 0; i < MAX_SIZE; i++)
 		for (int j = 0; j < MAX_SIZE; j++)
-			if (val_board[i][j] != 10)
+			if (val_board[i][j] != 10)		//특별 가중치 만을 제거하기 위함
 				val_board[i][j] = 0;
 }
 
@@ -98,7 +99,7 @@ void omokai::special_val(omok_board& bo)
 				ai_close_4(i, j, bo, 998);
 				ai_open_4(i, j, bo, 999);
 			}
-			if (ad_carry >= 2)
+			if (ad_carry >= 2)							//설정된 공격성에 따른 고려하는 공격의 수 조절
 				ai_open_3(i, j, bo, 380);
 			if (ad_carry >= 3)
 				ai_space_3(i, j, bo, 350);
@@ -294,8 +295,7 @@ int omokai::space_3(int x, int y, omok_board& bo, int val)
 	if (is_safe(y + 1) && is_safe(x + 1) && is_safe(x + 2) && is_safe(y + 2)
 		&& is_safe(x + 3) && is_safe(y + 3) && is_safe(x + 4) && is_safe(y + 4))
 		return 0;
-	if (con_dol_with_space(1, x, y, 3, bo.main_board)
-		&& is_safe_close(x, y - 1, bo) == 0 && is_safe_close(x, y + 3, bo) == 0)
+	if (con_dol_with_space(1, x, y, 3, bo.main_board))
 	{
 		if (!is_safe_close(x, y + 1, bo) && val_board[x][y + 1] < val)
 			val_board[x][y + 1] = val;
