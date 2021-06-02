@@ -24,14 +24,14 @@ int main()
 		if (!vic)										//게임이 종료되지 않았으면 ai착수 시작
 		{
 			omokai.special_val(omok_board);					//특별 가중치 값 부여
-			omokai.prt_val_voard();
+			//omokai.prt_val_voard();
 			omokai.set_ai_xy(omok_board);					//가중치에 따라 ai가 착수할 위치 설정
 			omok_board.set_board(omokai.ai_x, omokai.ai_y, -1);	//ai가 설정한 위치를 -1로 ai착수
 			vic = omok_board.is_win();
 		}
 		cout << endl;
 	}
-	//system("cls");
+	system("cls");
 	omok_board.prt_board();
 	if (vic == 1)
 		omok_board.prt_victory();

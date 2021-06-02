@@ -21,7 +21,7 @@ public:
 	void special_val(omok_board& bo);					//특정 가중치 부여
 	void init_val_board();								//10으로 설정된 부분을 제외하고 가중치를 모두 0으로 설정
 
-	//val : 20
+	//val : 30
 	int close_2(int x, int y, omok_board& bo, int val);
 	//val : 40
 	int open_2(int x, int y, omok_board& bo, int val);

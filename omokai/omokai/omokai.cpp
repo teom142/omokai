@@ -75,7 +75,7 @@ void omokai::alloc_val(int x, int y, int val)
 {
 	for (int i = -1; i <= 1; i++)
 		for (int j = -1; j <= 1; j++)
-			if (i != 0 || j != 0)
+			if (i != 0 || j != 0)						//i와 j가 0일 경우는 현재 위치(x, y)이기 때문에 값을 넣지 않는다.
 				if (!is_safe(x + i) && !is_safe(y + j))
 					val_board[x + i][y + j] = val;
 }
@@ -87,13 +87,14 @@ void omokai::special_val(omok_board& bo)
 	{
 		for (int j = 0; j < MAX_SIZE; j++)
 		{
-			close_2(i, j, bo, 30);
-			open_2(i, j, bo, 40);
-			close_3(i, j, bo, 60);
-			space_3(i, j, bo, 370);
-			open_3(i, j, bo, 300);
-			close_4(i, j, bo, 400);
-			space_4(i, j, bo, 450);
+			close_2(i, j, bo, 30);						//닫힌 2
+			open_2(i, j, bo, 40);						//열린 2
+			close_3(i, j, bo, 60);						//닫힌 3
+			space_3(i, j, bo, 370);						//한칸 띄어지 3
+			open_3(i, j, bo, 300);						//열린 3
+			close_4(i, j, bo, 400);						//닫힌3
+			space_4(i, j, bo, 450);						//한칸 띄어진 4
+														//열린 4가 있을경우 이미 com이 패배했기 때문에 따로 추가하지 않았다.
 			if (ad_carry >= 1)
 			{
 				ai_close_4(i, j, bo, 998);
@@ -121,7 +122,7 @@ int omokai::close_2(int x, int y, omok_board& bo, int val)
 		return 0;
 	if (con_dol(1, x, y, 2, bo.main_board))
 	{
-		if (is_safe_close(x, y - 1, bo) != is_safe_close(x, y + 2, bo))
+		if (is_safe_close(x, y - 1, bo) != is_safe_close(x, y + 2, bo)) 
 		{
 			if (!is_safe_close(x, y - 1, bo) && val_board[x][y - 1] < val)
 				val_board[x][y - 1] = val;
@@ -303,8 +304,7 @@ int omokai::space_3(int x, int y, omok_board& bo, int val)
 			val_board[x][y + 2] = val;
 	}
 	for (int i = -1; i <= 1; i++)
-		if (con_dol_with_space(i + 3, x, y, 3, bo.main_board)
-			&& is_safe_close(x - 1, y + i, bo) == 0 && is_safe_close(x + 4, y + i * -4, bo) == 0)
+		if (con_dol_with_space(i + 3, x, y, 3, bo.main_board))
 		{
 			if (!is_safe_close(x + 1, y - i, bo) && val_board[x + 1][y - i] < val)
 				val_board[x + 1][y - i] = val;

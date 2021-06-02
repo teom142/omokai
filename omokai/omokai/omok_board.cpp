@@ -109,7 +109,7 @@ int omok_board::user_input(int* x, int* y, int val)
 	set_board(*x, *y, val * 2);
 	while (user != 'r')
 	{
-		//system("cls");
+		system("cls");
 		prt_board();
 		cout << "w, a, s, d로 이동후 r로 착수하세요" << endl;
 		user = _getch();
