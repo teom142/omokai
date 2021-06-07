@@ -1,4 +1,5 @@
-﻿#include "omok_board.h"
+﻿/*omok_board.cpp*/
+#include "omok_board.h"
 
 omok_board::omok_board()
 {
@@ -107,7 +108,7 @@ int omok_board::user_input(int* x, int* y, int val)
 	char user = 0;
 
 	set_board(*x, *y, val * 2);
-	while (user != 'r')
+	while (user != 'r')				//사용자가 r을 눌러 착수하기 전까지 반복한다.
 	{
 		system("cls");
 		prt_board();

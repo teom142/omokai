@@ -1,6 +1,7 @@
+/*omokai.cpp*/
 #include "omokai.h"
 
-omokai::omokai()		//생성자를 이용해 모든 값을 초기화ㄴ
+omokai::omokai()		//생성자를 이용해 모든 값을 초기화
 {
 	ai_x = -1;
 	ai_y = -1;
@@ -83,7 +84,7 @@ void omokai::special_val(omok_board& bo)
 	init_val_board();
 	for (int i = 0; i < MAX_SIZE; i++)
 	{
-		for (int j = 0; j < MAX_SIZE; j++)
+		for (int j = 0; j < MAX_SIZE; j++)				//이중 for문을 이용해 선형으로 탐색하여 가중치를 부여한다.
 		{
 			close_2(i, j, bo, 30);
 			open_2(i, j, bo, 40);
@@ -115,20 +116,20 @@ int omokai::close_2(int x, int y, omok_board& bo, int val)
 {
 	if (bo.main_board[x][y] != 1)
 		return 0;
-	if (is_safe(y + 1) && is_safe(x + 1) && is_safe(x + 2) && is_safe(y + 2))
+	if (is_safe(y + 1) && is_safe(x + 1) && is_safe(x + 2) && is_safe(y + 2))			//2칸 이내에 인댁스를 벗어나면 함수 종료
 		return 0;
-	if (con_dol(1, x, y, 2, bo.main_board))
+	if (con_dol(1, x, y, 2, bo.main_board))						//두개로 돌이 연속으로 있다면, 방향은 가로방향
 	{
-		if (is_safe_close(x, y - 1, bo) != is_safe_close(x, y + 2, bo)) 
+		if (is_safe_close(x, y - 1, bo) != is_safe_close(x, y + 2, bo))		//둘 중 하나라도 open이면 
 		{
-			if (!is_safe_close(x, y - 1, bo) && val_board[x][y - 1] < val)
+			if (!is_safe_close(x, y - 1, bo) && val_board[x][y - 1] < val)		//open인 위치에 가중치를 부여한다.
 				val_board[x][y - 1] = val;
 			else if (!is_safe_close(x, y + 2, bo) && val_board[x][y + 2] < val)
 				val_board[x][y + 2] = val;
 		}
 	}
-	for (int i = -1; i <= 1; i++)
-		if (con_dol(3 + i, x, y, 2, bo.main_board))
+	for (int i = -1; i <= 1; i++)				//i가 -1, 0, 1일 경우 con_dol()함수의 dire매개변수가 2, 3, 4가 된다.
+		if (con_dol(3 + i, x, y, 2, bo.main_board))		//-1일 경우 dire가 2 즉 우하향 검사, 0일 경우 dire가 3 즉 세로 검사, 1일 경우 dire가 4 즉 좌하향 검사 
 			if (is_safe_close(x - 1, y + i, bo) != is_safe_close(x + 2, y + i * -2, bo))
 			{
 				if (!is_safe_close(x - 1, y + i, bo) && val_board[x - 1][y + i] < val)
@@ -147,10 +148,10 @@ int omokai::open_2(int x, int y, omok_board& bo, int val)
 		return 0;
 	if (con_dol(1, x, y, 2, bo.main_board))
 	{
-		if (is_safe_close(x, y - 1, bo) == 0 && is_safe_close(x, y + 2, bo) == 0
-				&& val_board[x][y - 1] < val && val_board[x][y + 2] < val)
+		if (is_safe_close(x, y - 1, bo) == 0 && is_safe_close(x, y + 2, bo) == 0	//가중치를 부여할 두 위치가 모두 open이고
+				&& val_board[x][y - 1] < val && val_board[x][y + 2] < val)			//해당 위치의 가중치가 부여할 가중치보다 작으면
 		{
-			val_board[x][y - 1] = val;
+			val_board[x][y - 1] = val;												//가중치를 부여한다.
 			val_board[x][y + 2] = val;
 		}
 	}

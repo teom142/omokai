@@ -1,3 +1,4 @@
+/*main.cpp*/
 #include "omok.h"
 #include "omokai.h"
 #include "omok_board.h"
@@ -9,7 +10,7 @@ int main()
 
 	omok_board.init_board();
 	int x = MAX_SIZE / 2, y = MAX_SIZE / 2;		//사용자가 입력하는 위치
-	int vic = omok_board.is_win();
+	int vic = omok_board.is_win();				//승리에 대한 정보를 담고 있는 변수
 	do {
 		cout << "인공지능의 공격성을 입력해주세요. (1 ~ 6 입력)\n참고로 5가 최고 난이도입니다 :)";
 		cin >> omokai.ad_carry;		//ai의 공격성 입력

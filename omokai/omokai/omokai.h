@@ -1,3 +1,4 @@
+/*omokai.h*/
 #include "omok.h"
 #include "omok_board.h"
 

@@ -1,3 +1,4 @@
+/*utill.cpp*/
 #include "omok.h"
 #include "omokai.h"
 //int main_board[MAX_SIZE + 1][MAX_SIZE]; //메인 대국판
@@ -9,7 +10,7 @@ int con_dol(int dire, int x, int y, int num, int main_board[MAX_SIZE + 1][MAX_SI
 		return 0;
 	if (dire == 1)		//가로
 	{
-		if (is_safe(y + num - 1))
+		if (is_safe(y + num - 1))		//index를 벗어나면 바로 0을 return 한다.
 			return 0;
 		for (int i = y + 1; i < y + num; i++)
 			if (dol != main_board[x][i])
@@ -59,7 +60,7 @@ int con_dol_with_space(int dire, int x, int y, int num, int main_board[MAX_SIZE 
 		for (int i = y + 1; i < y + num + 1; i++)
 			if (dol == main_board[x][i])
 				count++;
-		if (count == num - 1)
+		if (count == num - 1)		//조사하려고 한 돌의 수와 일치해야 1즉 참을 반환한다.
 			return 1;
 		else
 			return 0;

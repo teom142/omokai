@@ -1,3 +1,4 @@
+/*omok.h*/
 #ifndef _OMOK_H__
 #define _OMOK_H__
 # include <iostream>

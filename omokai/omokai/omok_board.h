@@ -1,3 +1,4 @@
+/*omok_board.h*/
 #pragma once
 #include "omok.h"
 
